@@ -1,12 +1,26 @@
+- name: Preconfigure MySQL root password
+  debconf:
+    name: "mysql-server"
+    question: "mysql-server/root_password"
+    value: "{{ mysql_root_password }}"
+    vtype: "password"
+
+- name: Confirm MySQL root password again
+  debconf:
+    name: "mysql-server"
+    question: "mysql-server/root_password_again"
+    value: "{{ mysql_root_password }}"
+    vtype: "password"
+
 - name: Install MySQL server
   apt:
     name: mysql-server
     state: present
     update_cache: yes
 
-- name: Enable and start MySQL
-  systemd:
+- name: Ensure MySQL is running
+  service:
     name: mysql
-    enabled: yes
     state: started
+    enabled: yes
 
