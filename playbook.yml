@@ -1,0 +1,10 @@
+---
+- name: Configure localhost with Docker, MySQL, and Redis
+  hosts: local
+  become: true
+  roles:
+    - docker
+    - swarm
+    - mysql
+    - redis
+

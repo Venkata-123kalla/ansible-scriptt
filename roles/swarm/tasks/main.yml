@@ -1,0 +1,7 @@
+---
+- name: Initialize Docker Swarm
+  shell: docker swarm init
+  register: swarm_result
+  failed_when: "'This node is already part of a swarm' not in swarm_result.stderr and swarm_result.rc != 0"
+  changed_when: "'Swarm initialized' in swarm_result.stdout"
+
